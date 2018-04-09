@@ -7,6 +7,8 @@ public class UserGUI : MonoBehaviour
 {
     private UserAction action;
     public int status = 0;
+	private GameObject Camera0;
+	private GameObject Camera1;
     GUIStyle style;
     GUIStyle buttonStyle;
 
@@ -20,9 +22,23 @@ public class UserGUI : MonoBehaviour
 
         buttonStyle = new GUIStyle("button");
         buttonStyle.fontSize = 30;
+
+		Camera0=GameObject.Find("Main Camera");
+		Camera1=GameObject.Find("Camera1");
     }
     void OnGUI()
     {
+
+		if(GUILayout.Button("侧面",GUILayout.Height(50))){
+			Camera0.active=true;
+			Camera1.active=false;
+		}
+
+		if(GUILayout.Button("正面",GUILayout.Height(50))){
+			Camera0.active=false;
+			Camera1.active=true;
+		}
+
         if (status == 1)
         {
             GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 85, 100, 50), "Gameover!", style);
