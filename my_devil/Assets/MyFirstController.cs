@@ -4,11 +4,11 @@ using UnityEngine;
 using Com.Mygame;
 
 //场景控制器，控制生成牧师/恶魔/岸边/水/船，并且相应点击操作
-public class MyFirstController : MonoBehaviour, SceneController, UserAction
+public class MyFirstController : MonoBehaviour,SceneController ,UserAction
 {
 
     readonly Vector3 water_pos = new Vector3(0, 0.5F, 0);
-
+	public MySSActionManager MySSActionManager;
     UserGUI userGUI;
 
     public CoastController fromCoast;
@@ -18,9 +18,11 @@ public class MyFirstController : MonoBehaviour, SceneController, UserAction
     
     void Awake()
     {
+		
         Director director = Director.getInstance();
         director.currentSceneController = this;
         userGUI = gameObject.AddComponent<UserGUI>() as UserGUI;
+		MySSActionManager = gameObject.AddComponent<MySSActionManager> () as MySSActionManager;
         characters = new MyCharacterController[6];
         loadResources();
     }
@@ -66,46 +68,50 @@ public class MyFirstController : MonoBehaviour, SceneController, UserAction
 
     public void moveBoat()
     {
-        if (boat.isEmpty())
-            return;
-        boat.Move();
-        userGUI.status = check_game_over();
-    }
+        
+
+		if (boat.isEmpty())
+			return;
+		//MySSActionManager.MoveBoat (boat);
+		boat.Move();
+		userGUI.status = check_game_over();
+
+	}
 
     public void characterIsClicked(MyCharacterController characterCtrl)
     {
         if (characterCtrl.isOnBoat())
         {
-            CoastController whichCoast;
+            CoastController Coast;
             if (boat.get_to_or_from() == -1)
-            { // to->-1; from->1
-                whichCoast = toCoast;
-            }
+                Coast = toCoast;
             else
-            {
-                whichCoast = fromCoast;
-            }
+                Coast = fromCoast;
 
             boat.GetOffBoat(characterCtrl.getName());
-            characterCtrl.moveToPosition(whichCoast.getEmptyPosition());
-            characterCtrl.getOnCoast(whichCoast);
-            whichCoast.getOnCoast(characterCtrl);
+
+            characterCtrl.moveToPosition(Coast.getEmptyPosition());
+			//MySSActionManager.MoveCharacter(characterCtrl,Coast.getEmptyPosition());
+
+            characterCtrl.getOnCoast(Coast);
+            Coast.getOnCoast(characterCtrl);
 
         }
-        else
-        {                                   // character on coast
-            CoastController whichCoast = characterCtrl.getCoastController();
+		else  // character on coast
+        {                                  
+            CoastController Coast = characterCtrl.getCoastController();
 
-            if (boat.getEmptyIndex() == -1)
-            {       // boat is full
-                return;
-            }
-
-            if (whichCoast.get_to_or_from() != boat.get_to_or_from())   // boat is not on the side of character
+			if (boat.getEmptyIndex() == -1)// boat is full    
                 return;
 
-            whichCoast.getOffCoast(characterCtrl.getName());
+            if (Coast.get_to_or_from() != boat.get_to_or_from())   // boat is not on the side of character
+                return;
+
+            Coast.getOffCoast(characterCtrl.getName());
+
             characterCtrl.moveToPosition(boat.getEmptyPosition());
+			//MySSActionManager.MoveCharacter(characterCtrl,Coast.getEmptyPosition());
+
             characterCtrl.getOnBoat(boat);
             boat.GetOnBoat(characterCtrl);
         }

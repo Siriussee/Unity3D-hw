@@ -15,14 +15,24 @@ public class MyClickGUI : MonoBehaviour
 
     void Start()
     {
+		
         action = Director.getInstance().currentSceneController as UserAction;
+
+		if (Director.getInstance().currentSceneController != null)
+			action = Director.getInstance().currentSceneController as UserAction;
+
+		if (action == null)
+			Debug.Log ("null in start");
     }
 
     void OnMouseDown()
     {
+		if (action == null)
+			return;
         if (gameObject.name == "boat")
         {
             action.moveBoat();
+
         }
         else
         {
