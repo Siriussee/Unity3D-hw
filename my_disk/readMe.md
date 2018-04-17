@@ -6,6 +6,6 @@
 
 用 H5 语法把视频的外链贴在这里了，应该能当流媒体播放的。
 
-<video src="http://ovi1rdu1p.bkt.clouddn.com/hw3-unity-compressed.mp4" width="720" height="540" controls="controls">
+<video src="http://ovi1rdu1p.bkt.clouddn.com/unity-hw4.mp4" width="720" height="540" controls="controls">
 Your browser does not support the video tag.
 </video>
