@@ -22,6 +22,7 @@ public interface IUserAction
     void BeginGame();
 }
 public enum SSActionEventType : int { Started, Competeted }
+
 public interface ISSActionCallback
 {
     void SSActionEvent(SSAction source, SSActionEventType events = SSActionEventType.Competeted,

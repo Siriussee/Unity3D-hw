@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FirstController : MonoBehaviour, ISceneController, IUserAction
 {
-    public FlyActionManager action_manager;
+	public IActionManager action_manager { get; set; }//动作管理器  
+    //public FlyActionManager action_manager;
     public DiskFactory disk_factory;
     public UserGUI user_gui;
     public ScoreRecorder score_recorder;
@@ -25,8 +26,9 @@ public class FirstController : MonoBehaviour, ISceneController, IUserAction
         director.CurrentScenceController = this;             
         disk_factory = Singleton<DiskFactory>.Instance;
         score_recorder = Singleton<ScoreRecorder>.Instance;
-        action_manager = gameObject.AddComponent<FlyActionManager>() as FlyActionManager;
-        user_gui = gameObject.AddComponent<UserGUI>() as UserGUI;
+        //action_manager = gameObject.AddComponent<FlyActionManager>() as FlyActionManager;
+		action_manager = gameObject.AddComponent<PhysisManager>() as PhysisManager;
+		user_gui = gameObject.AddComponent<UserGUI>() as UserGUI;
     }
 	
 	void Update ()

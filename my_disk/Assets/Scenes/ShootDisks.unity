@@ -274,7 +274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450b1f6abaa5ed640bd11e1851f9db82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action_manager: {fileID: 0}
   disk_factory: {fileID: 0}
   user_gui: {fileID: 0}
   score_recorder: {fileID: 0}

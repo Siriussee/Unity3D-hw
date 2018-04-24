@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyActionManager : SSActionManager
+public class FlyActionManager : SSActionManager, IActionManager
 {
 
     public UFOFlyAction fly;                            //飞碟飞行的动作
@@ -19,4 +19,8 @@ public class FlyActionManager : SSActionManager
         fly = UFOFlyAction.GetSSAction(disk.GetComponent<DiskData>().direction, angle, power);
         this.RunAction(disk, fly, this);
     }
+	public void playDisk()
+	{
+		//
+	}
 }
