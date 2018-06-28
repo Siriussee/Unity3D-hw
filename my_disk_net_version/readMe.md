@@ -1,4 +1,9 @@
-# <del>Homework 4 说明</del> Homework 5 说明
+# <del>Homework 4 说明 Homework 5</del> Homework 10 说明
+
+## Homework 10 部分
+
+加入了网络功能，现在可以和小伙伴一起打飞碟了！
+[视频](http://ovi1rdu1p.bkt.clouddn.com/out10.mp4)
 
 ## Homework 5 部分
 
